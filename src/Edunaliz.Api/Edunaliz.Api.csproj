@@ -19,4 +19,8 @@
       <Compile Remove="Controllers\WeatherForecastController.cs" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Edunaliz.Service\Edunaliz.Service.csproj" />
+    </ItemGroup>
+
 </Project>
