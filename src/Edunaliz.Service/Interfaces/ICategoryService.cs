@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Edunaliz.Service.DTOs;
 
-namespace Edunaliz.Service.Interfaces
+namespace Edunaliz.Service.Interfaces;
+
+public interface ICategoryService
 {
-    internal class ICategoryService
-    {
-    }
+    Task<CategoryResultDto> CreateAsync(CategoryCreationDto dto);
+    Task<CategoryResultDto> UpdateAsync(CategoryUpdateDto dto);
+    Task<bool> DeleteAsync(long id);
+    Task<CategoryResultDto> GetAsync(long id);
+    Task<IEnumerable<CategoryResultDto>> GetAllAsync();
 }
