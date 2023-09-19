@@ -24,6 +24,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Edunaliz.Service\Edunaliz.Service.csproj" />
       <ProjectReference Include="..\Edunaliz.DataAccess\Edunaliz.DataAccess.csproj" />
     </ItemGroup>
 
