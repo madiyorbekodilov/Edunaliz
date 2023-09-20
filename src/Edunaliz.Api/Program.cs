@@ -1,8 +1,8 @@
+using Edunaliz.Api.Extensions;
 using Edunaliz.Api.Middlewares;
 using Edunaliz.DataAccess.Contexts;
 using Edunaliz.Service.Helpers;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +20,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 });
 
 PathHelper.WebRootPath = Path.GetFullPath("wwwroot");
+//Add Custom Services
+builder.Services.AddServices();
 
 var app = builder.Build();
 
