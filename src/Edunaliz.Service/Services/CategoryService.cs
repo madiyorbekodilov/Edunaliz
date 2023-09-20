@@ -1,32 +1,75 @@
-﻿using Edunaliz.Service.DTOs;
+﻿using AutoMapper;
+using Edunaliz.Service.DTOs;
+using Edunaliz.Domain.Entities;
+using Edunaliz.Service.Exceptions;
 using Edunaliz.Service.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Edunaliz.DataAccess.IRepositories;
 
 namespace Edunaliz.Service.Services;
 
 public class CategoryService : ICategoryService
 {
-    public Task<CategoryResultDto> CreateAsync(CategoryCreationDto dto)
+    private readonly IRepository<Category> repository;
+    private readonly IMapper mapper;
+    public CategoryService(IRepository<Category> repository, IMapper mapper)
     {
-        throw new NotImplementedException();
+        this.mapper = mapper;
+        this.repository = repository;
+    }
+    public async Task<CategoryResultDto> CreateAsync(CategoryCreationDto dto)
+    {
+        var existCategory = await this.repository.GetAsync(c => c.Name == dto.Name);
+        if (existCategory is not null)
+            throw new AlreadyExistException($"This category already exist with name: {dto.Name}");
+
+        if (dto.ParentId != 0)
+        {
+            var existParent = await this.repository.GetAsync(p => p.Id == dto.ParentId)
+                ?? throw new NotFoundException($"This parent Id is null with id {dto.ParentId}");
+        }
+
+        var mappedCategory = this.mapper.Map<Category>(dto);
+        await this.repository.AddAsync(mappedCategory);
+        await this.repository.SaveAsync();
+
+        return this.mapper.Map<CategoryResultDto>(mappedCategory);
     }
 
-    public Task<bool> DeleteAsync(long id)
+    public async Task<bool> DeleteAsync(long id)
     {
-        throw new NotImplementedException();
+        var existCategory = await this.repository.GetAsync(p => p.Id == id)
+                ?? throw new NotFoundException($"This category Id is null with id {id}");
+
+        this.repository.Delete(existCategory);
+        await this.repository.SaveAsync();
+
+        return true;
     }
 
-    public Task<IEnumerable<CategoryResultDto>> GetAllAsync()
+    public async Task<IEnumerable<CategoryResultDto>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        var categories = await this.repository.GetAll().ToListAsync();
+        return this.mapper.Map<IEnumerable<CategoryResultDto>>(categories);
     }
 
-    public Task<CategoryResultDto> GetAsync(long id)
+    public async Task<CategoryResultDto> GetAsync(long id)
     {
-        throw new NotImplementedException();
+        var existCategory = await this.repository.GetAsync(p => p.Id == id)
+                ?? throw new NotFoundException($"This category Id is null with id {id}");
+
+        return this.mapper.Map<CategoryResultDto>(existCategory);
     }
 
-    public Task<CategoryResultDto> UpdateAsync(CategoryUpdateDto dto)
+    public async Task<CategoryResultDto> UpdateAsync(CategoryUpdateDto dto)
     {
-        throw new NotImplementedException();
+        var existCategory = await this.repository.GetAsync(p => p.Id == dto.Id)
+                ?? throw new NotFoundException($"This category Id is null with id {dto.Id}");
+
+        this.mapper.Map(dto, existCategory);
+        this.repository.Update(existCategory);
+        await this.repository.SaveAsync();
+
+        return this.mapper.Map<CategoryResultDto>(existCategory);
     }
 }
