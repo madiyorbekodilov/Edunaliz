@@ -1,5 +1,6 @@
 using Edunaliz.Api.Middlewares;
 using Edunaliz.DataAccess.Contexts;
+using Edunaliz.Service.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -18,6 +19,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+PathHelper.WebRootPath = Path.GetFullPath("wwwroot");
 
 var app = builder.Build();
 
