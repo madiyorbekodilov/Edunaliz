@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using Edunaliz.Service.DTOs;
 using Edunaliz.Domain.Entities;
 using Edunaliz.Service.Exceptions;
 using Edunaliz.Service.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Edunaliz.DataAccess.IRepositories;
+using Edunaliz.Service.DTOs.Categories;
 
 namespace Edunaliz.Service.Services;
 
