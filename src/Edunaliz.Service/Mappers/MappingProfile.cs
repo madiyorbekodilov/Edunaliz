@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Edunaliz.Domain.Entities;
 using Edunaliz.Service.DTOs.Users;
-using Edunaliz.Service.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;

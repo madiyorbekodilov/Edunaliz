@@ -1,4 +1,4 @@
-﻿using Edunaliz.Service.DTOs;
+﻿using Edunaliz.Service.DTOs.Categories;
 
 namespace Edunaliz.Service.Interfaces;
 
