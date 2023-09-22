@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Edunaliz.Domain.Entities;
+using Edunaliz.Service.DTOs;
 using Edunaliz.Service.DTOs.Users;
 using System;
 using System.Collections.Generic;
@@ -17,10 +18,9 @@ public class MappingProfile : Profile
         CreateMap<UserCreationDto, User>().ReverseMap();
         CreateMap<User, UserUpdateDto>().ReverseMap();
         CreateMap<User, UserResultDto>().ReverseMap();
-    }
-}
+
         //Categories
-        CreateMap<Category,CategoryCreationDto>().ReverseMap();
+        CreateMap<Category, CategoryCreationDto>().ReverseMap();
         CreateMap<Category, CategoryResultDto>().ReverseMap();
         CreateMap<Category, CategoryUpdateDto>().ReverseMap();
     }
