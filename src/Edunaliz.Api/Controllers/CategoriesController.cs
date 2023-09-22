@@ -1,5 +1,5 @@
 ﻿using Edunaliz.Api.Models;
-using Edunaliz.Service.DTOs;
+using Edunaliz.Service.DTOs.Categories;
 using Edunaliz.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
