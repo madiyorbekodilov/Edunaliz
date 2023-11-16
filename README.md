@@ -1,2 +1,3 @@
 # Edunaliz
-Assalomu alekum 
+Assalomu alekum .
+Bu online talim daturi.
